@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Wi-Fi</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #1E88E5;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #1565C0;
+        }
+
+        .options button {
+            background-color: #424242;
+        }
+
+        .options button:hover {
+            background-color: #616161;
+        }
+
+        #countdown, #wifi-info {
+            margin-top: 20px;
+            display: none;
+        }
+
+        #wifi-info {
+            text-align: left;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+
+        .wifi-detail {
+            margin: 10px 0;
+        }
+
+        .wifi-detail span {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        #qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login Wi-Fi maourafa</h1>
+    <button id="get-password">Dapatkan Password Wi-Fi</button>
+
+    <div class="options">
+        <button id="free-mode">Minta Password😁</button>
+    </div>
+
+    <div id="countdown">Ok Tunggu Sebentar😉: <span id="timer">30</span> detik</div>
+
+    <div id="wifi-info">
+        <div id="qr-code.png">
+             <img src="qr-code.png" alt="QR Code Wi-Fi">
+        </div>
+        <div class="wifi-detail">SSID       : <span onclick="copyText('WiFi-SSID')">wifi.maourafa.my.id</span></div>
+        <div class="wifi-detail">Password   : <span onclick="copyText('sshmaourafa')">password klik sini</span></div>
+        <div class="wifi-detail">IP         : <span onclick="copyText('192.168.1.1')">ip wifi klik sini</span></div>
+        <div class="wifi-detail">Quota      : <span>10 GB LIMIT</span></div>
+    </div>
+
+    <script>
+        const freeModeBtn = document.getElementById('free-mode');
+        const countdown = document.getElementById('countdown');
+        const timerSpan = document.getElementById('timer');
+        const wifiInfo = document.getElementById('wifi-info');
+
+        freeModeBtn.addEventListener('click', () => {
+            countdown.style.display = 'block';
+            let timeLeft = 30;
+            timerSpan.textContent = timeLeft;
+
+            const countdownInterval = setInterval(() => {
+                timeLeft--;
+                timerSpan.textContent = timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    wifiInfo.style.display = 'block';
+                }
+            }, 1000);
+        });
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert(`Teks '${text}' telah disalin!`);
+            });
+        }
+    </script>
+</body>
+</html>
